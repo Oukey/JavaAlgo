@@ -94,44 +94,42 @@ public class LinkedList2 {
     }
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
-        // здесь будет ваш код вставки узла после заданного узла
-
-        // если _nodeAfter = null
-        // добавьте новый элемент первым в списке
-        if (_nodeAfter == null) {
-            if (this.count() > 0) {
-                this.head.prev = _nodeToInsert;
-                _nodeToInsert.next = this.head;
-            }
+        // Вставка узла после заданного узла
+        if (this.head == null || _nodeAfter == this.tail) {
+            this.addInTail(_nodeToInsert);
+        } else if (_nodeAfter == null) {
+            _nodeToInsert.next = this.head;
+            this.head.prev = _nodeToInsert;
             this.head = _nodeToInsert;
-        } else if (_nodeAfter != null) {
-            if (this.count() > 1) {
-                _nodeToInsert.next = _nodeAfter.next;
-                _nodeAfter.next.prev = _nodeToInsert;
-            }
+        } else {
+            _nodeToInsert.next = _nodeAfter.next;
             _nodeToInsert.prev = _nodeAfter;
+            _nodeAfter.next.prev = _nodeToInsert;
             _nodeAfter.next = _nodeToInsert;
         }
     }
-        public void showList() {
-        ArrayList<Integer> showL = new ArrayList<> ();
-        Node node = this.head;
-        while (node != null) {
-            showL.add(node.value);
-            node = node.next;
-        }
-        System.out.println(showL);
-    }
+
+//    public void showList() {
+//        ArrayList<Integer> showL = new ArrayList<>();
+//        Node node = this.head;
+//        while (node != null) {
+//            showL.add(node.value);
+//            node = node.next;
+//        }
+//        System.out.println(showL);
+//    }
+
+//    public void showTail() {
+//        System.out.println("Tail: " + this.tail.value);
+//    }
 }
 
-class Node
-{
+class Node {
     public int value;
     public Node next;
     public Node prev;
 
-    public Node(int _value)
-    {
+    public Node(int _value) {
         value = _value;
         next = null;
         prev = null;
