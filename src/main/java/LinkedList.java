@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class LinkedList {
-    public Node head;
-    public Node tail;
+    public NodeLL head;
+    public NodeLL tail;
 
     public LinkedList() {
         head = null;
         tail = null;
     }
 
-    public void addInTail(Node item) {
+    public void addInTail(NodeLL item) {
         if (this.head == null)
             this.head = item;
         else
@@ -17,8 +17,8 @@ public class LinkedList {
         this.tail = item;
     }
 
-    public Node find(int value) {
-        Node node = this.head;
+    public NodeLL find(int value) {
+        NodeLL node = this.head;
         while (node != null) {
             if (node.value == value)
                 return node;
@@ -27,10 +27,10 @@ public class LinkedList {
         return null;
     }
 
-    public ArrayList<Node> findAll(int _value) {
-        ArrayList<Node> nodes = new ArrayList<Node>();
+    public ArrayList<NodeLL> findAll(int _value) {
+        ArrayList<NodeLL> nodes = new ArrayList<NodeLL>();
         // Поиск всех элементов по заданному значению
-        Node node = this.head;
+        NodeLL node = this.head;
         while (node != null) {
             if (node.value == _value)
                 nodes.add(node);
@@ -42,7 +42,7 @@ public class LinkedList {
     public boolean remove(int _value) {
         // Удаления одного узла по заданному значению
         if (this.head != null) {
-            Node node = this.head;
+            NodeLL node = this.head;
             if (node.value == _value && node.next == null) {
                 this.clear();
                 return true;
@@ -85,7 +85,7 @@ public class LinkedList {
 
     public int count() {
         // Подсчёт количества элементов в списке
-        Node node = this.head;
+        NodeLL node = this.head;
         int count = 0;
         while (node != null) {
             count += 1;
@@ -94,7 +94,7 @@ public class LinkedList {
         return count;
     }
 
-    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
+    public void insertAfter(NodeLL _nodeAfter, NodeLL _nodeToInsert) {
         // Вставка узла после заданного
         // Если список пуст и _nodeAfter равен null
         if (this.head == null && _nodeAfter == null) {
@@ -125,11 +125,11 @@ public class LinkedList {
 
 }
 
-class Node {
+class NodeLL {
     public int value;
-    public Node next;
+    public NodeLL next;
 
-    public Node(int _value) {
+    public NodeLL(int _value) {
         value = _value;
         next = null;
     }

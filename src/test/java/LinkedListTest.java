@@ -13,11 +13,11 @@ public class LinkedListTest extends TestCase {
     public void testFindAll() {
         LinkedList list = new LinkedList();
         Assert.assertEquals(list.findAll(51).size(), 0);
-        list.addInTail(new Node(51));
-        list.addInTail(new Node(52));
-        list.addInTail(new Node(52));
-        list.addInTail(new Node(54));
-        list.addInTail(new Node(52));
+        list.addInTail(new NodeLL(51));
+        list.addInTail(new NodeLL(52));
+        list.addInTail(new NodeLL(52));
+        list.addInTail(new NodeLL(54));
+        list.addInTail(new NodeLL(52));
         Assert.assertEquals(list.findAll(51).size(), 1);
         Assert.assertEquals(list.findAll(51).get(0).value, 51);
         Assert.assertEquals(list.findAll(52).size(), 3);
@@ -32,14 +32,14 @@ public class LinkedListTest extends TestCase {
     public void testRemoveFirstElement() {
         LinkedList list = new LinkedList();
         Assert.assertEquals(list.count(), 0);
-        list.addInTail(new Node(8));
+        list.addInTail(new NodeLL(8));
         Assert.assertEquals(list.head.value, 8);
         Assert.assertThat(list.remove(3), is(false));
         Assert.assertThat(list.remove(8), is(true));
         Assert.assertNull(list.head);
-        list.addInTail(new Node(5));
-        list.addInTail(new Node(55));
-        list.addInTail(new Node(155));
+        list.addInTail(new NodeLL(5));
+        list.addInTail(new NodeLL(55));
+        list.addInTail(new NodeLL(155));
         Assert.assertEquals(list.count(), 3);
         Assert.assertEquals(list.head.value, 5);
         Assert.assertThat(list.remove(5), is(true));
@@ -52,10 +52,10 @@ public class LinkedListTest extends TestCase {
 
     public void testRemoveMidleElement() {
         LinkedList list = new LinkedList();
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(33));
-        list.addInTail(new Node(331));
-        list.addInTail(new Node(3331));
+        list.addInTail(new NodeLL(3));
+        list.addInTail(new NodeLL(33));
+        list.addInTail(new NodeLL(331));
+        list.addInTail(new NodeLL(3331));
         Assert.assertEquals(list.count(), 4);
         Assert.assertThat(list.remove(313), is(false));
         Assert.assertThat(list.remove(33), is(true));
@@ -74,10 +74,10 @@ public class LinkedListTest extends TestCase {
     public void testRemoveAll() {
         LinkedList list = new LinkedList();
         for (int i = 1; i < 20; i++) {
-            list.addInTail(new Node(i));
+            list.addInTail(new NodeLL(i));
             if (i == 7 || i == 8 || i == 11 || i == 19) {
-                list.addInTail(new Node(i));
-                list.addInTail(new Node(i));
+                list.addInTail(new NodeLL(i));
+                list.addInTail(new NodeLL(i));
             }
         }
         Assert.assertEquals(list.count(), 27);
@@ -96,13 +96,13 @@ public class LinkedListTest extends TestCase {
         Assert.assertNull(list.head);
         list.clear();
         Assert.assertNull(list.head);
-        list.addInTail(new Node(2));
+        list.addInTail(new NodeLL(2));
         Assert.assertNotNull(list.head);
         list.clear();
         Assert.assertNull(list.head);
-        list.addInTail(new Node(2));
-        list.addInTail(new Node(3));
-        list.addInTail(new Node(2));
+        list.addInTail(new NodeLL(2));
+        list.addInTail(new NodeLL(3));
+        list.addInTail(new NodeLL(2));
         list.clear();
         Assert.assertNull(list.head);
         Assert.assertEquals(list.count(), 0);
@@ -110,12 +110,12 @@ public class LinkedListTest extends TestCase {
 
     public void testInsertAfter() {
         LinkedList list = new LinkedList();
-        list.insertAfter(null, new Node(1));
+        list.insertAfter(null, new NodeLL(1));
         Assert.assertEquals(list.tail.value, 1);
-        list.insertAfter(list.tail, new Node(8));
+        list.insertAfter(list.tail, new NodeLL(8));
         Assert.assertEquals(list.tail.value, 8);
-        list.addInTail(new Node(2));
-        list.insertAfter(list.head.next, new Node(55));
+        list.addInTail(new NodeLL(2));
+        list.insertAfter(list.head.next, new NodeLL(55));
         Assert.assertEquals(list.head.value, 1);
         Assert.assertEquals(list.tail.value, 2);
         Assert.assertEquals(list.head.next.value, 8);
