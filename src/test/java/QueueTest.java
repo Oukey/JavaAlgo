@@ -12,6 +12,12 @@ public class QueueTest {
         queue = new Queue<>();
     }
 
+    public void toPrint() {
+        while (queue.size() > 0) {
+            System.out.println(queue.dequeue());
+        }
+    }
+
     @Test
     public void test1() {
         setUp();
@@ -39,4 +45,19 @@ public class QueueTest {
         assertEquals(queue.dequeue().intValue(), 88);
         assertEquals(queue.size(), 0);
     }
+
+//    @Test
+//    public void test3() {
+//        setUp();
+//        queue.enqueue(1);
+//        queue.enqueue(2);
+//        queue.enqueue(3);
+//        queue.enqueue(4);
+//        queue.enqueue(5);
+//        assertNull(queue.rotate(queue, 6));
+//        Queue<Integer> rotate = queue.rotate(queue, 5);
+//        toPrint();
+//        assertEquals(queue.size(), 0);
+//
+//    }
 }

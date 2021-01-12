@@ -31,4 +31,17 @@ public class Queue<T> {
         return size;
     }
 
+//    public Queue<T> rotate(Queue<T> queue, int elem) {
+//        // Метод "проворачивает" очередь на заданное количество элементов
+//        if (queue.size() == 0 || elem > queue.size()) return null;
+//        else {
+//            int step = 0;
+//            while (step < elem) {
+//                queue.enqueue(queue.dequeue());
+//                step++;
+//            }
+//            return queue;
+//        }
+//    }
+
 }
