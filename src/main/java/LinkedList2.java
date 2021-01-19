@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class LinkedList2 {
-    public Node head;
-    public Node tail;
+    public NodeL2 head;
+    public NodeL2 tail;
 
     public LinkedList2() {
         head = null;
         tail = null;
     }
 
-    public void addInTail(Node _item) {
+    public void addInTail(NodeL2 _item) {
         if (head == null) {
             this.head = _item;
             this.head.next = null;
@@ -21,9 +21,9 @@ public class LinkedList2 {
         this.tail = _item;
     }
 
-    public Node find(int _value) {
+    public NodeL2 find(int _value) {
         // Поиск первого элемента с заданным значением
-        Node node = this.head;
+        NodeL2 node = this.head;
         while (node != null) {
             if (node.value == _value) {
                 return node;
@@ -33,11 +33,11 @@ public class LinkedList2 {
         return null;
     }
 
-    public ArrayList<Node> findAll(int _value) {
+    public ArrayList<NodeL2> findAll(int _value) {
         // Поиск всех узлов по заданному значению
         // Возвращает массив элементов
-        ArrayList<Node> nodes = new ArrayList<Node>();
-        Node node = this.head;
+        ArrayList<NodeL2> nodes = new ArrayList<NodeL2>();
+        NodeL2 node = this.head;
         while (node != null) {
             if (node.value == _value) {
                 nodes.add(node);
@@ -49,7 +49,7 @@ public class LinkedList2 {
 
     public boolean remove(int _value) {
         // Удаление первого узла по заданному значению
-        Node node = this.find(_value);
+        NodeL2 node = this.find(_value);
         if (node != null) {
             // Если в списке один узел
             if (this.count() == 1) {
@@ -85,7 +85,7 @@ public class LinkedList2 {
     public int count() {
         // Подсчёт количества элементов в списке
         int count = 0;
-        Node node = this.head;
+        NodeL2 node = this.head;
         while (node != null) {
             count++;
             node = node.next;
@@ -93,7 +93,7 @@ public class LinkedList2 {
         return count;
     }
 
-    public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
+    public void insertAfter(NodeL2 _nodeAfter, NodeL2 _nodeToInsert) {
         // Вставка узла после заданного узла
         if (this.head == null || _nodeAfter == this.tail) {
             this.addInTail(_nodeToInsert);
@@ -124,12 +124,12 @@ public class LinkedList2 {
 //    }
 }
 
-class Node {
+class NodeL2 {
     public int value;
-    public Node next;
-    public Node prev;
+    public NodeL2 next;
+    public NodeL2 prev;
 
-    public Node(int _value) {
+    public NodeL2(int _value) {
         value = _value;
         next = null;
         prev = null;
