@@ -108,11 +108,44 @@ public class OrderedList<T> {
 
     public Node<T> find(T val) {
         // Метод поиска узла по значению
+        if (len == 0) return null;
+        else {
+            Node node = this.head;
+            if (_ascending) {
+                while (node.next != null && compare(val, node.value) != 1) {
+                    if (val == node.value) return node;
+                    else {
+                        if (node != this.tail) node = node.next;
+                    }
+
+                }
+            } else {
+                while (node.next != null && compare(val, node.value) != -1) {
+                    if (val == node.value) return node;
+                    else {
+                        if (node != this.tail) node = node.next;
+                    }
+                }
+            }
+        }
         return null;
     }
 
     public void delete(T val) {
         // Метод удаления узла по значению
+        Node node = find(val);
+        if (node != null) {
+            if (node == this.head) {
+                node.next.prev = null;
+                this.head = node.next;
+            } else if (node == this.tail) {
+                node.prev.next = null;
+                this.tail = node.prev;
+            } else {
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
+            }
+        }
     }
 
     public void clear(boolean asc) {
@@ -120,6 +153,7 @@ public class OrderedList<T> {
         this.head = null;
         this.tail = null;
         _ascending = asc;
+        len = 0;
     }
 
     public int count() {
