@@ -108,25 +108,12 @@ public class OrderedList<T> {
 
     public Node<T> find(T val) {
         // Метод поиска узла по значению
-        if (len == 0) return null;
-        else {
-            Node node = this.head;
-            if (_ascending) {
-                while (node.next != null && compare(val, node.value) != 1) {
-                    if (val == node.value) return node;
-                    else {
-                        if (node != this.tail) node = node.next;
-                    }
-
-                }
-            } else {
-                while (node.next != null && compare(val, node.value) != -1) {
-                    if (val == node.value) return node;
-                    else {
-                        if (node != this.tail) node = node.next;
-                    }
-                }
-            }
+        Node node = this.head;
+        while (node != null) {
+            if (node.value.equals(val)) {
+                return node;
+            } else
+                node = node.next;
         }
         return null;
     }
@@ -179,5 +166,14 @@ public class OrderedList<T> {
             node = node.next;
         }
         return r;
+    }
+
+    public void printList() {
+        Node node = head;
+        while (node != null) {
+            System.out.print(node.value + " ");
+            node = node.next;
+        }
+        System.out.println();
     }
 }
