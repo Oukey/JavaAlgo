@@ -13,7 +13,8 @@ class Node<T> {
 }
 
 public class OrderedList<T> {
-    public Node<T> head, tail;
+    public Node head;
+    public Node tail;
     private boolean _ascending;
     public int len = 0;
 
@@ -23,47 +24,44 @@ public class OrderedList<T> {
         _ascending = asc;
     }
 
-    public int compare(T v1, T v2) {
+    public int compare(T v1, Object v2) {
         // Метод сравнения элементов по значению
         // -1 если v1 < v2
         // 0 если v1 == v2
         // +1 если v1 > v2
-        if (v1 instanceof Integer) {
-            return ((Integer) v1).compareTo((Integer) v2);
-        }
+        if (v1 instanceof Integer) return ((Integer) v1).compareTo((Integer) v2);
         if (v1 instanceof String && v2 instanceof String) {
-            if (((String) v1).compareTo((String) v2) > 0) return +1;
-            if (((String) v1).compareTo((String) v2) < 0) return -1;
+            return ((String) v1).compareTo((String) v2);
         }
         return 0;
     }
 
     public void add(T value) {
         // Метод автоматической вставка value в нужную позицию
-        Node<T> newNode = new Node<>(value);
+        Node newNode = new Node(value);
         // Если список был пуст сразу добавляется новый узел
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
+        if (len == 0) {
+            this.head = newNode;
+            this.tail = newNode;
             len++;
         } else {
             if (_ascending) {
                 // Если список сортируется по возрастанию
-                if (compare(value, head.value) != 1) {
+                if (compare(value, this.head.value) != 1) {
                     // Если значение нового узла меньше чем значение головного
-                    newNode.next = head;
-                    head.prev = newNode;
-                    head = newNode;
+                    newNode.next = this.head;
+                    this.head.prev = newNode;
+                    this.head = newNode;
                     len++;
-                } else if (compare(value, tail.value) != -1) {
+                } else if (compare(value, this.tail.value) != -1) {
                     // Иначе если значение нового узла больше значения хвостового
-                    newNode.prev = tail;
-                    tail.next = newNode;
-                    tail = newNode;
+                    newNode.prev = this.tail;
+                    this.tail.next = newNode;
+                    this.tail = newNode;
                     len++;
                 } else {
                     // для сравнения средних элементов
-                    Node<T> node = tail;
+                    Node node = this.tail;
                     // Пока значение нового узла не меньше очередного
                     // (перебор от хвоста к голове
                     while (compare(value, node.value) != 1) {
@@ -75,27 +73,28 @@ public class OrderedList<T> {
                     node.next = newNode;
                     len++;
                 }
+
             } else {
                 // Если список сортируется по убыванию
-                if (compare(value, head.value) != -1) {
+                if (compare(value, this.head.value) != -1) {
                     // Если значение нового узла больше или равно значению головного
-                    newNode.next = head;
-                    head.prev = newNode;
-                    head = newNode;
+                    newNode.next = this.head;
+                    this.head.prev = newNode;
+                    this.head = newNode;
                     len++;
-                } else if (compare(value, tail.value) != 1) {
+                } else if (compare(value, this.tail.value) != 1) {
                     // Если значение нового узла меньше или равно значению хвостового узла
-                    newNode.prev = tail;
-                    tail.next = newNode;
-                    tail = newNode;
+                    newNode.prev = this.tail;
+                    this.tail.next = newNode;
+                    this.tail = newNode;
                     len++;
                 } else {
                     // Для средних узлов
-                    Node<T> node = tail;
+                    Node node = this.tail;
                     // пока значение нового узла не меньше очередного
                     // перебор от головы к хвосту
                     while (compare(value, node.value) != -1) {
-                        node = newNode.next;
+                        node = node.next;
                     }
                     newNode.prev = node;
                     newNode.next = node.next;
@@ -109,52 +108,50 @@ public class OrderedList<T> {
 
     public Node<T> find(T val) {
         // Метод поиска узла по значению
-        Node node = head;
+        Node node = this.head;
         while (node != null) {
             if (node.value.equals(val)) {
                 return node;
-            }
-            node = node.next;
+            } else
+                node = node.next;
         }
-        return null; // здесь будет ваш код
+        return null;
     }
 
     public void delete(T val) {
         // Метод удаления узла по значению
-        Node<T> node = find(val);
+        Node node = find(val);
         if (node != null) {
-            if (node == head) {
+            if (node == this.head) {
                 node.next.prev = null;
-                head = node.next;
-                len--;
-            } else if (node == tail) {
+                this.head = node.next;
+            } else if (node == this.tail) {
                 node.prev.next = null;
-                tail = node.prev;
-                len--;
+                this.tail = node.prev;
             } else {
                 node.prev.next = node.next;
                 node.next.prev = node.prev;
-                len--;
             }
         }
     }
 
     public void clear(boolean asc) {
-        _ascending = asc;
         // Метод очистки списка
-        head = null;
-        tail = null;
+        this.head = null;
+        this.tail = null;
         _ascending = asc;
         len = 0;
     }
 
     public int count() {
         // Метод подсчета количества элементов в списке
+        int len = this.len;
         return len;
     }
 
-    ArrayList<Node<T>> getAll() {
-        // Представление упорядоченного списка в виде стандартного
+    ArrayList<Node<T>> getAll()
+    // Представление упорядоченного списка в виде стандартного
+    {
         ArrayList<Node<T>> r = new ArrayList<Node<T>>();
         Node<T> node = head;
         while (node != null) {
