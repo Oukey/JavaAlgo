@@ -114,7 +114,9 @@ public class OrderedList<T> {
         // Метод удаления узла по значению
         Node<T> node = find(val);
         if (node != null) {
-            if (node == head) {
+            if (count() == 1) {
+                clear(_ascending);
+            } else if (node == head) {
                 node.next.prev = null;
                 head = node.next;
                 len--;
