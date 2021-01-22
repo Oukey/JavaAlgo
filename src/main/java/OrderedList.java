@@ -99,86 +99,15 @@ public class OrderedList<T> {
         }
     }
 
-    // <<- Дополнительный вариант
-    public void addPlus(T value) {
-        // Метод автоматической вставка value в нужную позицию
-        Node<T> newNode = new Node<>(value);
-        // Если список был пуст сразу добавляется новый узел
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
-            len++;
-        } else {
-            if (_ascending) {
-                // Если список сортируется по возрастанию
-                if (compare(value, head.value) <= 0) {
-                    // Если значение нового узла меньше чем значение головного
-                    newNode.next = head;
-                    head.prev = newNode;
-                    head = newNode;
-                    len++;
-                } else if (compare(value, tail.value) >= 0) {
-                    // Иначе если значение нового узла больше значения хвостового
-                    newNode.prev = tail;
-                    tail.next = newNode;
-                    tail = newNode;
-                    len++;
-                } else {
-                    // для сравнения средних элементов
-                    Node<T> node = tail;
-                    // Пока значение нового узла не меньше очередного
-                    // (перебор от хвоста к голове
-                    while (compare(value, node.value) < 0) {
-                        node = node.prev;
-                    }
-                    newNode.prev = node.next;
-                    newNode.next = node.next;
-                    node.next.prev = newNode;
-                    node.next = newNode;
-                    len++;
-                }
-            } else {
-                // Если список сортируется по убыванию
-                if (compare(value, head.value) >= 0) {
-                    // Если значение нового узла больше или равно значению головного
-                    newNode.next = head;
-                    head.prev = newNode;
-                    head = newNode;
-                    len++;
-                } else if (compare(value, tail.value) <= 0) {
-                    // Если значение нового узла меньше или равно значению хвостового узла
-                    newNode.prev = tail;
-                    tail.next = newNode;
-                    tail = newNode;
-                    len++;
-                } else {
-                    // Для средних узлов
-                    Node<T> node = tail;
-                    // пока значение нового узла не меньше очередного
-                    // перебор от головы к хвосту
-                    while (compare(value, node.value) > 0) {
-                        node = newNode.next;
-                    }
-                    newNode.prev = node;
-                    newNode.next = node.next;
-                    node.next.prev = newNode;
-                    node.next = newNode;
-                    len++;
-                }
-            }
-        }
-    }
 
     public Node<T> find(T val) {
         // Метод поиска узла по значению
-        Node node = head;
+        Node<T> node = head;
         while (node != null) {
-            if (node.value.equals(val)) {
-                return node;
-            }
+            if (node.value.equals(val)) return node;
             node = node.next;
         }
-        return null; // здесь будет ваш код
+        return null;
     }
 
     public void delete(T val) {
@@ -206,7 +135,6 @@ public class OrderedList<T> {
         // Метод очистки списка
         head = null;
         tail = null;
-        _ascending = asc;
         len = 0;
     }
 
@@ -217,7 +145,8 @@ public class OrderedList<T> {
 
     ArrayList<Node<T>> getAll() {
         // Представление упорядоченного списка в виде стандартного
-        ArrayList<Node<T>> r = new ArrayList<Node<T>>();
+//        ArrayList<Node<T>> r = new ArrayList<Node<T>>();
+        var r = new ArrayList<Node<T>>();
         Node<T> node = head;
         while (node != null) {
             r.add(node);
@@ -227,7 +156,7 @@ public class OrderedList<T> {
     }
 
     public void printList() {
-        Node node = head;
+        Node<T> node = head;
         while (node != null) {
             System.out.print(node.value + " ");
             node = node.next;
