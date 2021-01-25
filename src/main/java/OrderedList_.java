@@ -1,24 +1,24 @@
 import java.util.*;
 
 
-class Node<T> {
+class Node_<T> {
     public T value;
-    public Node<T> next, prev;
+    public Node_<T> next, prev;
 
-    public Node(T _value) {
+    public Node_(T _value) {
         value = _value;
         next = null;
         prev = null;
     }
 }
 
-public class OrderedList<T> {
-    public Node head;
-    public Node tail;
+public class OrderedList_<T> {
+    public Node_ head;
+    public Node_ tail;
     private boolean _ascending;
     public int len = 0;
 
-    public OrderedList(boolean asc) {
+    public OrderedList_(boolean asc) {
         head = null;
         tail = null;
         _ascending = asc;
@@ -38,7 +38,7 @@ public class OrderedList<T> {
 
     public void add(T value) {
         // Метод автоматической вставка value в нужную позицию
-        Node newNode = new Node(value);
+        Node_ newNode = new Node_(value);
         // Если список был пуст сразу добавляется новый узел
         if (len == 0) {
             this.head = newNode;
@@ -61,7 +61,7 @@ public class OrderedList<T> {
                     len++;
                 } else {
                     // для сравнения средних элементов
-                    Node node = this.tail;
+                    Node_ node = this.tail;
                     // Пока значение нового узла не меньше очередного
                     // (перебор от хвоста к голове
                     while (compare(value, node.value) != 1) {
@@ -90,7 +90,7 @@ public class OrderedList<T> {
                     len++;
                 } else {
                     // Для средних узлов
-                    Node node = this.tail;
+                    Node_ node = this.tail;
                     // пока значение нового узла не меньше очередного
                     // перебор от головы к хвосту
                     while (compare(value, node.value) != -1) {
@@ -106,9 +106,9 @@ public class OrderedList<T> {
         }
     }
 
-    public Node<T> find(T val) {
+    public Node_<T> find(T val) {
         // Метод поиска узла по значению
-        Node node = this.head;
+        Node_ node = this.head;
         while (node != null) {
             if (node.value.equals(val)) {
                 return node;
@@ -120,7 +120,7 @@ public class OrderedList<T> {
 
     public void delete(T val) {
         // Метод удаления узла по значению
-        Node node = find(val);
+        Node_ node = find(val);
         if (node != null) {
             if (node == this.head) {
                 node.next.prev = null;
@@ -149,11 +149,11 @@ public class OrderedList<T> {
         return len;
     }
 
-    ArrayList<Node<T>> getAll()
+    ArrayList<Node_<T>> getAll()
     // Представление упорядоченного списка в виде стандартного
     {
-        ArrayList<Node<T>> r = new ArrayList<Node<T>>();
-        Node<T> node = head;
+        ArrayList<Node_<T>> r = new ArrayList<Node_<T>>();
+        Node_<T> node = head;
         while (node != null) {
             r.add(node);
             node = node.next;
@@ -162,7 +162,7 @@ public class OrderedList<T> {
     }
 
     public void printList() {
-        Node node = head;
+        Node_ node = head;
         while (node != null) {
             System.out.print(node.value + " ");
             node = node.next;
