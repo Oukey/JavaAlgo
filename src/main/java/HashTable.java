@@ -39,6 +39,7 @@ public class HashTable {
     public int find(String value) {
         // Метод проверки наличия указанного значения
         // Возвращает индекс или -1
+        if (slots[0] == null) return -1;
         for (int i = 0; i < size; i++) {
             if (slots[i].equals(value)) {
                 return i;
@@ -54,5 +55,13 @@ public class HashTable {
             }
         }
         return -1;
+    }
+
+    public void Show() {
+        System.out.print("[");
+        for (int ind = 0; ind < size - 1; ind++) {
+            System.out.print(slots[ind] + ", ");
+        }
+        System.out.println(slots[size - 1] + "]");
     }
 }
