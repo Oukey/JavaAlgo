@@ -41,9 +41,13 @@ public class HashTable {
         // Возвращает индекс или -1
         if (slots[0] == null) return -1;
         for (int i = 0; i < size; i++) {
-            if (slots[i].equals(value)) {
+            if (slots[i] != null) {
+                if (!slots[i].equals(value)) {
+                    continue;
+                }
                 return i;
             }
+
         }
         return -1;
     }
